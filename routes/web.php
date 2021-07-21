@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/','user\WelcomeController@index')->name('home');
 Route::get('/home','user\WelcomeController@index')->name('home2');
-Route::get('/kontak','user\WelcomeController@kontak')->name('kontak');
+Route::get('/berita','user\WelcomeController@berita')->name('berita');
+// Route::get('/berita/{id}','user\WelcomeController@berita_detail')->name('berita');
 Route::get('/produk','user\ProdukController@index')->name('user.produk');
 Route::get('/produk/create','user\ProdukController@form')->name('user.produk.create');
+Route::get('/produk/edit/{id}','user\ProdukController@edit')->name('user.produk.edit');
+Route::post('/produk/update/{id}','user\ProdukController@update')->name('user.produk.update');
+Route::get('/produk/delete{id}','user\ProdukController@destroy')->name('user.produk.delete');
 Route::post('/produk/store','user\ProdukController@store')->name('user.produk.store');
 Route::get('/produk/cari','user\ProdukController@cari')->name('user.produk.cari');
 Route::get('/kategori/{id}','KategoriController@produkByKategori')->name('user.kategori');
@@ -105,8 +110,10 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::get('/admin/berita/tambah','admin\BeritaController@tambah')->name('admin.berita.tambah');
     Route::post('/admin/berita/store','admin\BeritaController@store')->name('admin.berita.store');
     Route::post('/admin/berita/update{id}','admin\BeritaController@update')->name('admin.berita.update');
-    Route::post('/admin/berita/edit{id}','admin\BeritaController@edit')->name('admin.berita.edit');
-    Route::post('/admin/berita/delete{id}','admin\BeritaController@delete')->name('admin.berita.delete');
+    Route::get('/admin/berita/edit{id}','admin\BeritaController@edit')->name('admin.berita.edit');
+    Route::get('/admin/berita/delete{id}','admin\BeritaController@destroy')->name('admin.berita.delete');
+    Route::get('/admin/berita/detail{id}','admin\BeritaController@show')->name('admin.berita.detail');
+    
 
 
     Route::get('/admin/product','admin\ProductController@index')->name('admin.product');
@@ -115,6 +122,7 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::get('/admin/product/edit/{id}','admin\ProductController@edit')->name('admin.product.edit');
     Route::get('/admin/product/delete/{id}','admin\ProductController@delete')->name('admin.product.delete');
     Route::post('/admin/product/update/{id}','admin\ProductController@update')->name('admin.product.update');
+    // Route::get('/admin/product/detail/{id}','admin\ProductController@show')->name('admin.product.detail');
 
     // Route::get('/admin/transaksi','admin\TransaksiController@index')->name('admin.transaksi');
     // Route::get('/admin/transaksi/perludicek','admin\TransaksiController@perludicek')->name('admin.transaksi.perludicek');
@@ -142,7 +150,7 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 
 });
 
-Route::group(['middleware' => ['auth','checkRole:tengkulak']],function(){\
+Route::group(['middleware' => ['auth','checkRole:tengkulak']],function(){
 
     Route::get('/tengkulak','user\WelcomeController@index')->name('tengkulak.welcome');
     Route::post('/keranjang/simpan','user\KeranjangController@simpan')->name('user.keranjang.simpan');

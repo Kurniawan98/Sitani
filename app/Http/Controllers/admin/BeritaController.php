@@ -57,7 +57,8 @@ class BeritaController extends Controller
             'image' => $file,
             'isi' => $request->isi
         ]);
-        return view()->route('admin.berita')->with('status','Berhasil Menambah Berita');
+
+        return redirect()->route('admin.berita')->with('status','Berhasil Menambah Berita');
         }
     }
 
@@ -70,6 +71,9 @@ class BeritaController extends Controller
     public function show($id)
     {
         //
+        return view('admin.berita.detail', [
+            'berita' => berita::findOrFail($id)
+        ]);
     }
 
     /**
@@ -81,6 +85,10 @@ class BeritaController extends Controller
     public function edit($id)
     {
         //
+        $data = array(
+            'berita' => $berita = berita::FindOrFail($id)
+        );
+        return view('admin.berita.edit',$data);
     }
 
     /**
@@ -93,6 +101,18 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //ambil data sesuai id dari parameter
+        $berita = berita::FindOrFail($id);
+        //lalu ambil apa aja yang mau diupdate
+        $berita->judul = $request->input('judul');
+        $berita->tanggal = $request->input('tanggal');
+        $berita->image = $request->input('image');
+        $berita->isi = $request->input('isi');
+
+        //lalu simpan perubahan
+        $berita->save();
+        echo $berita;
+        return redirect()->route('admin.berita')->with('status','Berhasil Mengubah Berita');
     }
 
     /**
@@ -104,5 +124,8 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         //
+        berita::destroy($id);
+        
+        return redirect()->route('admin.berita')->with('status','Berhasil Mengahapus Berita');
     }
 }

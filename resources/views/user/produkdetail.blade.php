@@ -40,9 +40,18 @@
             <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
             </div>
         </div>
-
+        <div class="">
+            <a href="#" class="btn btn-primary">Hubungi Penjuan</a></br></br>
         </div>
-        <p><button type="submit" class="buy-now btn btn-sm btn-primary">Hubungi penjual</button></p>
+        @if(Auth::user() == null)
+        @elseif(Auth::user()['role'] == 'petani')
+        <div class="">
+            <a href="{{ route('user.produk.edit',['id'=>$produk->id]) }}" class="btn btn-warning">Edit Produk</a></br></br>
+            <a href="{{ route('user.produk.delete',['id'=>$produk->id]) }}" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger">Hapus Produk</a></br></br>
+        </div>
+
+        @endif
+        {{-- <p><button type="submit" class="buy-now btn btn-sm btn-primary">Hubungi penjual</button></p> --}}
         </form>
         </div>
     </div>

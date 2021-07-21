@@ -5,7 +5,7 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
                   <i class="mdi mdi-home"></i>
-                </span> Dashboard </h3>
+                </span> Data User </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
@@ -55,23 +55,26 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th> No </th>
-                            <th> Pemesan </th>
-                            <th> Subtotal </th>
-                            <th> Status Pesanan </th>
-                            <th> Aksi </th>
+                            <th> Nama </th>
+                            <th> Email </th>
+                            <th> Role </th>
+                            {{-- <th> Tanggal Bergabung </th> --}}
+                            {{-- <th> Status Pesanan </th>
+                            <th> Aksi </th> --}}
                           </tr>
                         </thead>
                         <tbody>
-                          {{-- @foreach($order as $order)
+                          @foreach ($data as $d)
                             <tr>
-                              <td>{{ $order->invoice }}</td>
-                              <td>{{ $order->nama_pemesan }}</td>
-                              <td>{{ $order->subtotal + $order->biaya_cod }}</td>
-                              <td>{{ $order->name }}</td>
-                              <td> <a href="{{ route('admin.transaksi.detail',['id'=>$order->id]) }}" class="btn btn-warning btn-sm">Detail</a></td>
+                              <td>{{ $d->name }}</td>
+                              <td>{{ $d->email }}</td>
+                              <td>{{ $d->role }}</td>
+                              {{-- <td>{{ $d->created_at }}</td> --}}
+                              {{-- <td>{{ $d->create_at}}</td> --}}
+                              {{-- <td>{{ $order->name }}</td> --}}
+                              {{-- <td> <a href="{{ route('admin.transaksi.detail',['id'=>$order->id]) }}" class="btn btn-warning btn-sm">Detail</a></td> --}}
                             </tr>
-                          @endforeach --}}
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

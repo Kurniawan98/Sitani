@@ -99,7 +99,7 @@
             <li class="{{ Request::path() === '/' ? '' : '' }}"><a href="{{ route('home') }}">Beranda</a></li>
             @if(Auth::user() && (Auth::user()['role'] == 'petani' || Auth::user()['role'] == 'tengkulak' ))
               <li class="{{ Request::path() === 'produk' ? '' : '' }}"><a href="{{ route('user.produk') }}">Produk</a></li>
-              <li class="{{ Request::path() === 'kontak' ? '' : '' }}"><a href="{{ route('kontak') }}">Berita</a></li>
+              <li class="{{ Request::path() === 'berita' ? '' : '' }}"><a href="{{ route('berita') }}">Berita</a></li>
             @endif
           </ul>
         </div>

@@ -8,6 +8,7 @@ use App\Product;
 use App\Categories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class ProdukController extends Controller
 {
@@ -84,5 +85,42 @@ class ProdukController extends Controller
         $file->move('product_image',$file->getClientOriginalName());
 
         return redirect('produk');
+    }
+
+    public function edit($id)
+    {
+        //
+        $produk = array(
+            'produk' => $produk = Product::FindOrFail($id),
+            // 'category' => $berita = Category::FindOrFail($name)
+            'category' => Categories::all()
+        );
+        return view('user.produk.edit',$produk);
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+        //ambil data sesuai id dari parameter
+        $produk = Product::FindOrFail($id);
+        //lalu ambil apa aja yang mau diupdate
+        $produk->name = $request->input('name');
+        $produk->description = $request->input('description');
+        $produk->price = $request->input('price');
+        $produk->image = $request->input('image');
+        $produk->categories_id = $request->input('category');
+
+        //lalu simpan perubahan
+        $produk->save();
+        return redirect('produk');
+        // return redirect()->route('produk')->with('status','Berhasil Mengubah Produk');
+    }
+
+    public function destroy($id)
+    {
+        //
+        Product::destroy($id);
+        
+        return redirect()->route('user.produk')->with('status','Berhasil Mengahapus Produk');
     }
 }

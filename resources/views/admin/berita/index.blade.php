@@ -33,8 +33,9 @@
                             <th width="5%">No</th>
                             <th>Judul</th>
                             <th>Tanggal</th>
-                            <th>Image</th>
-                            <th>Isi</th>
+                            {{-- <th>Image</th>
+                            <th>Isi</th> --}}
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -44,11 +45,11 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->judul }}</td>
                                 <td>{{ $d->tanggal }}</td>
-                                <td>{{ $d->image }}</td>
-                                <td>{{ $d->isi }}</td>
-                                <td align="center">
+                                {{-- <td>{{ $d->image }}</td> --}}
+                                {{-- <td>{{ $d->isi }}</td> --}}
+                                <td align="left">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                  <a href="{{ route('admin.berita.edit',['id'=>$d->id]) }}" class="btn btn-warning btn-sm">
+                                  <a href="{{ route('admin.berita.detail',['id'=>$d->id]) }}" class="btn btn-warning btn-sm">
                                     <i class="mdi mdi-tooltip-edit"></i>
                                   </a>
                                   <a href="{{ route('admin.berita.delete',['id'=>$d->id]) }}" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger btn-sm">

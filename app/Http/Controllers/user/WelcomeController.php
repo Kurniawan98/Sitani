@@ -4,9 +4,9 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Product;
 use App\hargapangan;
 use Illuminate\Support\Facades\DB;
+use App\Berita;
 class WelcomeController extends Controller
 {
     public function index()
@@ -20,8 +20,17 @@ class WelcomeController extends Controller
         return view('user.welcome',compact('data'));
     }
 
-    public function kontak()
+    public function berita()
     {
-        return view('user.kontak');
+        $data = berita::all();
+
+        return view('user.berita',compact('data'));
     }
+
+    // public function berita_detail($id)
+    // {
+    //     return view('user.berita', [
+    //         'berita' => berita::findOrFail($id)
+    //     ]);
+    // }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBeritaTables extends Migration
+class CreateBeritaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,8 +17,8 @@ class CreateBeritaTables extends Migration
             $table->id();
             $table->string('judul');
             $table->date('tanggal');
-            $table->string('image');
-            $table->char('isi');
+            $table->text('image');
+            $table->text('isi');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateBeritaTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('berita_tables');
+        Schema::dropIfExists('berita');
     }
 }
